@@ -1,1 +1,2 @@
-### Link your references in here
+- [Cemm Lab - Consolidation](https://cemmlab.webhost.uic.edu/Experiment%2011-Consolidation.pdf)
+- Soil Mechanics Laboratory Manual, Braja M. Das
