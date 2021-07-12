@@ -1,6 +1,6 @@
 'use strict';
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function() {
 
 	const restartButton = document.getElementById('restart');
 	const instrMsg = document.getElementById('procedure-message');
@@ -35,35 +35,6 @@ document.addEventListener('DOMContentLoaded', function(){
 		return trace(xVals, yVals, 'Graph');
 	};
 
-	function cutting()
-	{
-		if(translate[1] < 0 && objs['rammer'].pos[1] <= 0)
-		{
-			translate[1] *= -1;
-		}
-
-		updatePos(objs['rammer'], translate);
-		const currSoil = objs['soil'].move(step, translate), reqHeight = (objs['collar'].height + objs['mould'].height - 40) / 3;
-
-		if(objs['rammer'].pos[1] + objs['rammer'].height >= currSoil.pos[1] + currSoil.errMargin)
-		{
-			currSoil.cut(reqHeight, hitLim - hitCtr);
-			hitCtr += 1;
-
-			if(hitCtr === hitLim)
-			{
-				translate[1] = 0;
-				cutStep = false;
-				step += 1;
-				hitCtr = 0;
-				objs['rammer'].pos[1] = 90;
-				return;
-			}
-
-			translate[1] *= -1;
-		}
-	};
-
 	function limCheck(obj, translate, lim, step)
 	{
 		if(obj.pos[0] === lim[0])
@@ -80,7 +51,12 @@ document.addEventListener('DOMContentLoaded', function(){
 		{
 			if(step === 2)
 			{
-				document.getElementById("output1").innerHTML = "Mass of mould = " + String(randomNumber(3500, 3800)) + " g";
+				document.getElementById("output1").innerHTML = "Mass of ring = " + String(randomNumber(3500, 3800)) + " g";
+			}
+
+			else if(step === 4)
+			{
+				objs['soil'] = new ring(obj.height, obj.width, obj.pos[0], obj.pos[1], obj.color);
 			}
 
 			else if(step === enabled.length - 2)
@@ -112,219 +88,190 @@ document.addEventListener('DOMContentLoaded', function(){
 		obj.pos[1] += translate[1];
 	};
 
-	function rotate(objs, rotation, rotLim)
-	{
-		objs.forEach((obj, ix) => {
-			if(obj.angle !== rotLim)
-			{
-				obj.angle += rotation;
-				return 0;
-			}
-		});
-
-		return 1;
+	function canvas_arrow(ctx, fromx, fromy, tox, toy) {
+		const headlen = 10, dx = tox - fromx, dy = toy - fromy, angle = Math.atan2(dy, dx);
+		ctx.moveTo(fromx, fromy);
+		ctx.lineTo(tox, toy);
+		ctx.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+		ctx.moveTo(tox, toy);
+		ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
 	};
 
-	class soil {
-		constructor(height, width, x, y) {
+	class loader {
+		constructor(height, width, radius, x, y) {
 			this.height = height;
 			this.width = width;
 			this.pos = [x, y];
-			this.color = "#654321";
-			this.normal = 20;
-			this.errMargin = 100;
-		};
-
-		draw(ctx) {
-			ctx.beginPath();
-			ctx.fillStyle = this.color;
-			ctx.rect(this.pos[0], this.pos[1] + this.height - this.normal, this.width, this.normal);
-			ctx.moveTo(this.pos[0], this.pos[1] + this.height - this.normal);
-			ctx.quadraticCurveTo(this.pos[0] + this.width / 2, this.pos[1], this.pos[0] + this.width, this.pos[1] + this.height - this.normal);
-			ctx.closePath();
-			ctx.fill();
-		};
-
-		cut(reqHeight, hitsLeft) {
-			this.pos[1] += Math.abs(reqHeight - this.height) / hitsLeft;
-			this.height -= Math.abs(reqHeight - this.height) / hitsLeft;
-			this.normal += Math.abs(reqHeight - this.normal) / hitsLeft;
-			this.errMargin -= this.errMargin / hitsLeft;
-		};
-	};
-	
-	class soils {
-		constructor(num, currSoil) {
-			this.height = currSoil.height;
-			this.width = currSoil.width;
-			this.pos = [...currSoil.pos];
-			this.soils = [];
-			
-			for(let i = 0; i < num; i += 1)
-			{
-				this.soils.push(new soil(this.height, this.width, this.pos[0], this.pos[1]));
-				this.soils[i].color = currSoil.color;
-			}
-		};
-
-		draw(ctx) {
-			this.soils.forEach((soil, idx) => {
-				soil.draw(ctx);
-			});
-		};
-
-		move(step, translate) {
-			if(step === 9 || step === 10)
-			{
-				return this.soils[0];
-			}
-			else if(step === 11 || step === 12)
-			{
-				return this.soils[1];
-			}
-			else if(step === 13 || step === 14)
-			{
-				return this.soils[2];
-			}
-			else
-			{
-				this.soils.forEach((soil, ix) => {
-					updatePos(soil, translate);
-				});
-				return this;
-			}
-		};
-
-		trim(change) {
-			this.soils.pop();
-			this.soils[this.soils.length - 1].pos[1] += change;
-			return 1;
-		}
-	};
-
-	class mould {
-		constructor(height, width, x, y) {
-			this.height = height;
-			this.width = width;
-			this.pos = [x, y];
-			this.img = new Image();
-			this.img.src = './images/mould.png';
-			this.img.onload = () => {ctx.drawImage(this.img, this.pos[0], this.pos[1], this.width, this.height);}; 
-		};
-
-		draw(ctx) {
-			ctx.drawImage(objs['mould'].img, objs['mould'].pos[0], objs['mould'].pos[1], objs['mould'].width, objs['mould'].height);
-		};
-	};
-
-	class water {
-		constructor(height, width, x, y) {
-			this.height = height;
-			this.width = width;
-			this.pos = [x, y];
+			this.marginHoriz = 0.3 * this.height;
+			this.radius = radius;
 			this.angle = 0;
-			this.waterHeight = height / 2;
-			this.flowPercent = [0, 0];
-			this.flowDims = [height / 6, 180];
-			this.waterStart = [this.waterHeight, -width / 2];
-			this.flowFlag = false;
 		};
 
 		draw(ctx) {
-			ctx.lineWidth = 3;
-			ctx.translate(this.pos[0] + this.width / 2, this.pos[1] + this.height / 2);
-			ctx.rotate(this.angle * Math.PI / 180);
+			const marginVert = 0.1 * this.width, heightVert = 0.85 * this.height, widthVert = 0.05 * this.width, heightHoriz = 0.1 * this.height;
+			ctx.fillStyle = data.colors.gray;
 
-			ctx.fillStyle = "white";
 			ctx.beginPath();
-			ctx.rect(-this.width / 2, -this.height / 2, this.width, this.height)
-			ctx.closePath();
+			ctx.rect(this.pos[0] + marginVert, this.pos[1], widthVert, heightVert);
+			ctx.rect(this.pos[0] + this.width - marginVert, this.pos[1], -widthVert, heightVert);
+			ctx.rect(this.pos[0], this.pos[1] + heightVert, this.width, this.height - heightVert);
+			ctx.rect(this.pos[0], this.pos[1] + heightVert, this.width, this.height - heightVert);
+			ctx.rect(this.pos[0], this.pos[1] + this.marginHoriz, this.width, heightHoriz);
 			ctx.fill();
 			ctx.stroke();
 
-			const e1 = [this.width / 2, -this.height / 2], e2 = [-this.width / 2, -this.height / 2];
-			const gradX = (e1[0] - e2[0]) / -4, gradY = 5;
-
 			ctx.fillStyle = "white";
 			ctx.beginPath();
-			ctx.moveTo(e2[0], e2[1]);
-			curvedArea(ctx, e2, -1 * gradX, -1 * gradY);
-			curvedArea(ctx, e1, gradX, gradY);
-			ctx.closePath();
+			ctx.arc(this.pos[0] + this.width / 2, this.pos[1] + this.radius, this.radius, 0, 2 * Math.PI);
+
+			canvas_arrow(ctx, this.pos[0] + this.width / 2, this.pos[1] + this.radius, this.pos[0] + this.width / 2 + this.radius * Math.sin(this.angle), this.pos[1] + this.radius * (1 - Math.cos(this.angle)));
+			//ctx.moveTo(this.pos[0] + this.width / 2, this.pos[1] + this.radius);
+			//ctx.lineTo(this.pos[0] + this.width / 2 + this.radius * Math.sin(this.angle), this.pos[1] + this.radius * (1 - Math.cos(this.angle)));
+
+			ctx.moveTo(this.pos[0] + this.width / 2, this.pos[1] + 2 * this.radius);
+			ctx.lineTo(this.pos[0] + this.width / 2, this.pos[1] + this.marginHoriz);
 			ctx.fill();
 			ctx.stroke();
-
-			ctx.fillStyle = "#1ca3ec";
-			ctx.beginPath();
-			ctx.rect(-this.width / 2 + 2, this.height / 2 - this.waterHeight, this.width - 4, this.waterHeight - 2);
-			ctx.rect(-this.width / 2 + 2, this.height / 2 - this.waterStart[0], this.flowDims[0], -this.flowPercent[0] * (this.height - this.waterStart[0]));
-			ctx.rect(this.waterStart[1] + 2 + this.flowDims[0], -this.height / 2 - this.flowDims[0], -this.flowPercent[1] * this.flowDims[1], this.flowDims[0]);
-			ctx.closePath();
-			ctx.fill();
-
-			ctx.setTransform(1, 0, 0, 1, 0, 0);
 		};
 
-		flow(change) {
-			if(this.flowPercent[0] < 1)
-			{
-				this.flowPercent[0] += change;
-			}
-			else if(this.flowPercent[1] < 1 && !this.flowFlag)
-			{
-				this.flowPercent[1] += change;
-			}
-			else if(this.waterHeight > 1)
-			{
-				this.flowFlag = true;
-				this.waterHeight *= (1 - change);
-				this.waterStart[0] *= (1 - change);
-			}
-			else if(this.waterStart[0] < this.height)
-			{
-				this.waterStart[0] += change * this.height;
-			}
-			else if(this.waterStart[1] > -this.width / 2 - this.flowDims[1])
-			{
-				this.waterStart[1] -= change * this.flowDims[1];
-				this.flowPercent[1] -= change;
-			}
-			else
+		applyLoad(change) {
+			this.marginHoriz += change;
+			this.angle += 5 * change * Math.PI / 180;
+		};
+	};
+
+	class loadingCap {
+		constructor(height, width, x, y) {
+			this.height = height;
+			this.width = width;
+			this.pos = [x, y];
+		};
+
+		draw(ctx) {
+			ctx.fillStyle = data.colors.gray;
+			const gradX = 30, gradY = 20;
+
+			ctx.beginPath();
+			ctx.moveTo(this.pos[0], this.pos[1] + this.height);
+			ctx.lineTo(this.pos[0] + this.width, this.pos[1] + this.height);
+			ctx.lineTo(this.pos[0] + this.width, this.pos[1] + gradY);
+			ctx.lineTo(this.pos[0] + this.width - gradX, this.pos[1]);
+			ctx.lineTo(this.pos[0] + gradX, this.pos[1]);
+			ctx.lineTo(this.pos[0], this.pos[1] + gradY);
+			ctx.lineTo(this.pos[0], this.pos[1] + this.height);
+			ctx.fill();
+			ctx.stroke();
+		};
+
+		fill(change) {
+			if(this.waterHeight >= this.height - 10)
 			{
 				return 1;
 			}
 
+			this.waterHeight += change;
 			return 0;
 		};
 	};
 
-	class collar {
+	class waterBath {
 		constructor(height, width, x, y) {
 			this.height = height;
 			this.width = width;
 			this.pos = [x, y];
-			this.img = new Image();
-			this.img.src = './images/collar.png';
-			this.img.onload = () => {ctx.drawImage(this.img, this.pos[0], this.pos[1], this.width, this.height);}; 
+			this.waterHeight = 0;
 		};
 
 		draw(ctx) {
-			ctx.drawImage(objs['collar'].img, objs['collar'].pos[0], objs['collar'].pos[1], objs['collar'].width, objs['collar'].height);
+			ctx.fillStyle = data.colors.blue;
+			ctx.beginPath();
+			ctx.rect(this.pos[0], this.pos[1] + (this.height - this.waterHeight), this.width, this.waterHeight);
+			ctx.closePath();
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.moveTo(this.pos[0], this.pos[1]);
+			ctx.lineTo(this.pos[0], this.pos[1] + this.height);
+			ctx.lineTo(this.pos[0] + this.width, this.pos[1] + this.height);
+			ctx.lineTo(this.pos[0] + this.width, this.pos[1]);
+			ctx.stroke();
+		};
+
+		fill(change) {
+			if(this.waterHeight >= this.height - 10)
+			{
+				return 1;
+			}
+
+			this.waterHeight += change;
+			return 0;
 		};
 	};
 
-	class rammer {
-		constructor(height, width, x, y) {
+	class ring {
+		constructor(height, width, x, y, color) {
 			this.height = height;
 			this.width = width;
 			this.pos = [x, y];
-			this.img = new Image();
-			this.img.src = './images/rammer.png';
-			this.img.onload = () => {ctx.drawImage(this.img, this.pos[0], this.pos[1], this.width, this.height);}; 
+			this.color = color;
 		};
 
 		draw(ctx) {
-			ctx.drawImage(objs['rammer'].img, objs['rammer'].pos[0], objs['rammer'].pos[1], objs['rammer'].width, objs['rammer'].height);
+			ctx.fillStyle = this.color;
+
+			const e1 = [this.pos[0] + this.width, this.pos[1]], e2 = [...this.pos];
+			const gradX = (e1[0] - e2[0]) / -4, gradY = 5;
+
+			ctx.beginPath();
+			ctx.moveTo(e2[0], e2[1]);
+			curvedArea(ctx, e2, -1 * gradX, -1 * gradY);
+			curvedArea(ctx, e1, gradX, gradY);
+			ctx.lineTo(this.pos[0], this.pos[1] + this.height);
+			ctx.lineTo(this.pos[0] + this.width, this.pos[1] + this.height);
+			ctx.lineTo(this.pos[0] + this.width, this.pos[1]);
+			curvedArea(ctx, [this.pos[0] + this.width, this.pos[1]], gradX, gradY);
+			ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+		};
+	};
+
+	class rect {
+		constructor(height, width, x, y, color) {
+			this.height = height;
+			this.width = width;
+			this.pos = [x, y];
+			this.color = color; 
+		};
+
+		draw(ctx) {
+			ctx.fillStyle = this.color;
+			ctx.beginPath();
+			ctx.rect(this.pos[0], this.pos[1], this.width, this.height);
+			ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+		};
+
+		shrink(change) {
+			this.height -= change;
+		};
+	};
+
+	class stones {
+		constructor(height, width, x, y, gap) {
+			this.height = height;
+			this.width = width;
+			this.pos = [x, y];
+			this.gap = gap;
+			
+			this.stonesArr = [new rect(this.height, this.width, this.pos[0], this.pos[1], "black"), new rect(this.height, this.width, this.pos[0], this.pos[1] + this.gap, "black")];
+		};
+
+		draw(ctx) {
+			this.stonesArr.forEach((stone, ind) => {
+				stone.draw(ctx);
+			});
 		};
 	};
 
@@ -423,28 +370,25 @@ document.addEventListener('DOMContentLoaded', function(){
 
 	function init()
 	{
-		cutStep = false;
-		hitCtr = 0;
-
-		document.getElementById("output1").innerHTML = "Mass of mould = ____ g";
+		fps = 150;
+		document.getElementById("output1").innerHTML = "Mass of ring = ____ g";
 		document.getElementById("output2").innerHTML = "Volume of soil = ____ cm" + "3".sup();
 
 		objs = {
+			"loader": new loader(330, 270, 30, 480, 50),
 			"weight": new weight(270, 240, 90, 190),
-			"mould": new mould(120, 180, 570, 270),
-			"collar": new collar(70, 130, 595, 220),
-			"rammer": new rammer(60, 50, 635, 90),
-			"water": new water(70, 60, 155, 60),
-			"soil": new soil(210, 110, 90, 170),
+			"water": new waterBath(110, 170, 530, 215),
+			"ring": new ring(50, 150, 600, 330, data.colors.gray),
+			"soil": new rect(50, 140, 610, 330, data.colors.soilBrown),
+			"stones": new stones(20, 140, 140, 190, 70),
+			"loadingCap": new loadingCap(50, 140, 545, 185),
 		};
 		keys = [];
 
-		enabled = [["weight"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould"], ["weight", "mould", "soil"], ["mould", "soil", "water"], ["mould", "soil", "water"], ["mould", "soil", "collar"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil", "collar", "rammer"], ["mould", "soil"], ["weight", "mould", "soil"], ["weight", "mould", "soil"], []];
+		enabled = [["weight"], ["weight", "ring"], ["weight", "ring"], ["weight", "ring", "soil"], ["weight", "ring", "soil"], ["ring", "soil", "stones"], ["ring", "soil", "stones", "loader"], ["ring", "soil", "stones", "loader", "water"], ["ring", "soil", "stones", "loader", "water"], ["ring", "soil", "stones", "loader", "water"], ["ring", "soil", "stones", "loader", "water", "loadingCap"], ["ring", "soil", "stones", "loader", "water", "loadingCap"], [], []];
 		step = 0;
 		translate = [0, 0];
 		lim = [-1, -1];
-		rotation = 0;
-		rotLim = -1;
 	};
 
 	function restart() 
@@ -499,84 +443,47 @@ document.addEventListener('DOMContentLoaded', function(){
 		keys.forEach(function(val, ind, arr) {
 			if(canvasPos[0] >= objs[val].pos[0] - errMargin && canvasPos[0] <= objs[val].pos[0] + objs[val].width + errMargin && canvasPos[1] >= objs[val].pos[1] - errMargin && canvasPos[1] <= objs[val].pos[1] + objs[val].height + errMargin)
 			{
-				if((step === 2 || step === 17) && val === "mould")
+				if(step === 2 && val === "ring")
 				{
 					hover = true;
 					translate[0] = -5;
 					translate[1] = -5;
-					lim[0] = 120;
-					lim[1] = 150;
+					lim[0] = 135;
+					lim[1] = 210;
 				}
 
-				else if(step === 3 && val === "mould")
+				else if(step === 4 && val === "soil")
+				{
+					hover = true;
+					translate[0] = -5;
+					translate[1] = -5;
+					lim[0] = 140;
+					lim[1] = 210;
+				}
+
+				else if(step === 8 && val === "soil")
 				{
 					hover = true;
 					translate[0] = 5;
 					translate[1] = 5;
-					lim[0] = 570;
-					lim[1] = 270;
+					lim[0] = objs['water'].pos[0] + objs['water'].width / 2 - objs['ring'].width / 2;
+					lim[1] = objs['water'].pos[1] + objs['water'].height - objs['stones'].height - objs['ring'].height;
+				}
 
+				else if(step === 9 && val === "water")
+				{
+					hover = true;
+					translate[1] = 1;
+				}
+
+				else if(step === 11 && val === "loadingCap")
+				{
+					hover = true;
+					translate[1] = 1;
+					lim[1] = 210;
 					if(flag)
 					{
-						keys = keys.filter(function(val, index) {
-							return val !== "weight";
-						});
-					}
-				}
-
-				else if(step === 6 && val === "water")
-				{
-					hover = true;
-					rotation = -1;
-					rotLim = -90;
-				}
-
-				else if(step === 9 && val === "soil")
-				{
-					hover = true;
-					const temp = new soils(3, objs['soil']);
-					objs['soil'] = temp;
-
-					translate[0] = 5;
-					translate[1] = -1;
-					lim[0] = 605;
-					lim[1] = 160;
-				}
-
-				else if((step === 10 || step === 12 || step === 14) && val === "rammer")
-				{
-					hover = true;
-					cutStep = true;
-					translate[1] = 5;
-				}
-
-				else if(step === 11 && val === "soil")
-				{
-					hover = true;
-					translate[0] = 5;
-					translate[1] = -1;
-					lim[0] = 605;
-					lim[1] = 110;
-				}
-
-				else if(step === 13 && val === "soil")
-				{
-					hover = true;
-					translate[0] = 5;
-					translate[1] = -1;
-					lim[0] = 605;
-					lim[1] = 60;
-				}
-
-				else if(step === 15 && val === "mould")
-				{
-					hover = true;
-					if(flag)
-					{
-						keys = keys.filter(function(val, index) {
-							return val !== "collar" && val !== "rammer";
-						});
-						translate[1] = 10;
+						fps = 30;
 					}
 				}
 			}
@@ -589,8 +496,6 @@ document.addEventListener('DOMContentLoaded', function(){
 			translate[1] = 0;
 			lim[0] = 0;
 			lim[1] = 0;
-			rotation = 0;
-			rotLim = -1;
 		}
 
 		return step;
@@ -607,33 +512,27 @@ document.addEventListener('DOMContentLoaded', function(){
 	canvas.height = 400;
 	canvas.style = "border:3px solid";
 	const ctx = canvas.getContext("2d");
+	ctx.lineWidth = 3;
 
-	const fill = "#A9A9A9", border = "black", lineWidth = 1.5, fps = 150;
+	const border = "black", lineWidth = 3;
 	const msgs = [
 		"Click on 'Weighing Machine' in the apparatus menu to add a weighing machine to the workspace.", 
-		"Click on 'Mould' in the apparatus menu to add a mould to the workspace.",
-		"Click on the mould to move it to the weighing machine and weigh it.",
-		"Click on the mould to move it back away from the weighing machine to make space for other apparatus.",
+		"Click on 'Consolidation Ring' in the apparatus menu to add a consolidation ring to the workspace.",
+		"Click on the ring to move it to the weighing machine and weigh it.",
 		"Click on 'Soil Sample' in the apparatus menu to add a soil sample to the workspace.",
-		"Click on 'Water' in the apparatus menu to add a container of water to the workspace.",
-		"Click on the water container to pour it onto the soil.",
-		"Click on 'Collar' in the apparatus menu to add a collar to the workspace.",
-		"Click on 'Rammer' in the apparatus menu to add a rammer to the workspace.",
-		"Click on the soil to move a portion of it to the mould for compaction.",
-		"Click on the rammer to compact the soil by repeated strikes.",
-		"Click on the soil to move a portion of it to the mould for compaction.",
-		"Click on the rammer to compact the soil by repeated strikes.",
-		"Click on the soil to move a portion of it to the mould for compaction.",
-		"Click on the rammer to compact the soil by repeated strikes.",
-		"Click on the mould with soil to remove the collar and trim the excess soil.",
-		"Click on 'Weighing Machine' in the apparatus menu to add a weighing machine to the workspace.", 
-		"Click on the mould with soil to weigh it. Finally, determine the water content of the soil sample. Use the following <a href='https://sd-iiith.vlabs.ac.in/exp/water-content/'>link</a> to learn more about water content determination.",
+		"Click on the soil sample to move it to the ring and weigh them together.",
+		"Click on 'Porous Stones' in the apparatus menu to add porous stones to the top and bottom of the ring.",
+		"Click on 'Loading Device' in the apparatus menu to add a loading device to the workspace.",
+		"Click on 'Water Bath' in the apparatus menu to add a water bath to the loading device.",
+		"Click on the soil to move it along with the ring and stones to the water bath.",
+		"Click on the water bath to fill it with water.",
+		"Click on 'Loading Cap' in the apparatus menu to add a loading cap to the setup in the water bath.",
+		"Click on the loading cap to apply a load/force on the soil.",
 		"Click the restart button to perform the experiment again.",
 	];
 
-	const hitLim = 10;
 	let soilVol;
-	let step, translate, rotation, lim, rotLim, objs, keys, enabled, small, cutStep, hitCtr;
+	let step, translate, lim, objs, keys, enabled, small, fps;
 	init();
 
 	const tableData = [
@@ -648,10 +547,13 @@ document.addEventListener('DOMContentLoaded', function(){
 	objNames.forEach(function(elem, ind) {
 		const obj = document.getElementById(elem);
 		obj.addEventListener('click', function(event) {
-			if(elem === "soil")
+			if(elem === "stones")
 			{
-				soilVol = randomNumber(940, 950);
-				document.getElementById("output2").innerHTML = "Volume of soil = " + String(soilVol) + "cm" + "3".sup();
+				objs['soil'] = new rect(objs['soil'].height, objs['soil'].width, objs['soil'].pos[0], objs['soil'].pos[1], objs['soil'].color);
+				objs['ring'] = new rect(objs['ring'].height, objs['ring'].width, objs['ring'].pos[0], objs['ring'].pos[1], objs['ring'].color);
+				keys = keys.filter(function(val, index) {
+					return val !== "weight";
+				});
 			}
 
 			keys.push(elem);
@@ -716,58 +618,68 @@ document.addEventListener('DOMContentLoaded', function(){
 			}
 		});
 
-		if(ctr === enabled[step].length && !rotation &&!translate[0] && !translate[1])
+		if(ctr === enabled[step].length && !translate[0] && !translate[1])
 		{
 			document.getElementById("main").style.pointerEvents = 'auto';
-		}
-
-		if(step === 6 && rotation && rotate([objs['water']], rotation, rotLim))
-		{
-			if(objs['water'].flow(0.01))
-			{
-				objs['soil'].color = "#b86d29";
-				keys = keys.filter(function(val, index) {
-					return val !== "water";
-				});
-
-				rotation = 0;
-				rotLim = -1;
-				step += 1;
-			}
 		}
 
 		if(translate[0] !== 0 || translate[1] !== 0)
 		{
 			let temp = step;
-			const soilMoves = [9, 11, 13, 17], mouldMoves = [2, 3, 17];
+			const soilMoves = [4, 8, 11], ringMoves = [2, 8], stoneMoves = [8, 11], loadingCapMoves = [11];
 
-			if(step === 15)
+			if(step === 9)
 			{
-				temp += objs['soil'].trim(translate[1]);
-				translate[1] = 0;
+				temp += objs['water'].fill(translate[1]);
+				if(temp !== step)
+				{
+					translate[1] = 0;
+				}
+			}
+
+			if(stoneMoves.includes(step))
+			{
+				updatePos(objs['stones'], translate);
+				updatePos(objs['stones'].stonesArr[0], translate);
+				if(!loadingCapMoves.includes(step))
+				{
+					updatePos(objs['stones'].stonesArr[1], translate);
+					if(!ringMoves.includes(step))
+					{
+						temp = limCheck(objs['stones'], translate, lim, step);
+					}
+				}
 			}
 
 			if(soilMoves.includes(step))
 			{
-				updatePos(objs['soil'].move(step, translate), translate);
-				if(step !== 17)
+				updatePos(objs['soil'], translate);
+
+				if(loadingCapMoves.includes(step))
 				{
-					temp = limCheck(objs['soil'].move(step, translate), translate, lim, step);
+					objs['soil'].shrink(translate[1]);
+					objs['loader'].applyLoad(translate[1]);
+				}
+
+				else if(!ringMoves.includes(step))
+				{
+					temp = limCheck(objs['soil'], translate, lim, step);
 				}
 			}
 
-			if(mouldMoves.includes(step))
+			if(ringMoves.includes(step))
 			{
-				updatePos(objs['mould'], translate);
-				temp = limCheck(objs['mould'], translate, lim, step);
+				updatePos(objs['ring'], translate);
+				temp = limCheck(objs['ring'], translate, lim, step);
+			}
+
+			if(loadingCapMoves.includes(step))
+			{
+				updatePos(objs['loadingCap'], translate);
+				temp = limCheck(objs['loadingCap'], translate, lim, step);
 			}
 
 			step = temp;
-		}
-
-		if(cutStep)
-		{
-			cutting();
 		}
 
 		document.getElementById("procedure-message").innerHTML = msgs[step];
