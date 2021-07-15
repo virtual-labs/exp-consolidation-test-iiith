@@ -23,10 +23,10 @@
 				"d": "pressure ball"
 			},
 			"explanations": {
-				"a": "",
-				"b": "",
+				"a": "This is not a measuring device.",
+				"b": "This is used to apply the load, it cannot measure the compression the soil undergoes.",
 				"c": "The vertical compression of the specimen is measured by means of a dial gauge. The dial gauge gives the readings of the deflection in the height of the soil specimen due to the applied loads.",
-				"d": ""
+				"d": "This is used to distribute the load and not for measuring."
 			},
 			"difficulty": "beginner",
 			"correctAnswer": "c"
@@ -41,9 +41,9 @@
 			},
 			"explanations": {
 				"a": "In consolidation test, since the load on the soil specimen is applied in the vertical direction, the deflection due to the load is also in the vertical direction. Hence, in the consolidation test, the soil is restrained laterally.",
-				"b": "",
-				"c": "",
-				"d": ""
+				"b": "The load is applied vertically on the soil specimen and hence the deflection is in the vertical direction. Thus, it is not possible for the soil to be restrained vertically.",
+				"c": "In consolidation test, since the load on the soil specimen is applied in the vertical direction, the deflection due to the load is also in the vertical direction. Hence, in the consolidation test, the soil is restrained laterally.",
+				"d": "There is a restrain put on the soil in a specific direction."
 			},
 			"difficulty": "beginner",
 			"correctAnswer": "a"
