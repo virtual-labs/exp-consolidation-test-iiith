@@ -1,11 +1,7 @@
 data = {
 	"colors": {
 		"blue": "#1ca3ec",
-		"brown": "#82663c",
-		"yellow": "#dbfe5b",
 		"gray": "#a9a9a9",
 		"soilBrown": "#654321",
-		"wetSoilBrown": "#b86d29",
-		"lightBlue": "#add8ec"
 	}
 }

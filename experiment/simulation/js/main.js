@@ -11,27 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
 		return Number((Math.random() * (max - min + 1) + min).toFixed(2));
 	};
 
-	function logic(tableData)
+	function logic(tableData, mainTableData)
 	{
-		const waterContents = [randomNumber(7, 9), randomNumber(10, 12), randomNumber(12, 14), randomNumber(15, 16), randomNumber(17, 18)], soilMasses = [randomNumber(1500, 1600), randomNumber(1750, 1800), randomNumber(2150, 2200), randomNumber(2100, 2150), randomNumber(2000, 2150),];
 		let xVals = [], yVals = [], maxIx = 0;
 		tableData.forEach(function(row, index) {
-			row['Soil Sample No.'] = index + 1;
-			row['Water Content(%)'] = Number(waterContents[index]);
-			row['Wet Compacted Soil Mass(g)'] = Number(soilMasses[index]);
-			row['Wet Density(g/cc)'] = (soilMasses[index] / soilVol).toFixed(2);
-			row['Dry Density(g/cc)'] = Number((row['Wet Density(g/cc)'] / (1 + waterContents[index] / 100)).toFixed(2));
-			xVals.push(row['Water Content(%)']);
-			yVals.push(row['Dry Density(g/cc)']);
-
-			if(yVals[maxIx] < yVals[index])
-			{
-				maxIx = index;
-			}
+			xVals.push(row['Time, t (min)']);
+			yVals.push(row['Vertical Dial Reading (cm)']);
 		});
 
-		document.getElementById('optWater').innerHTML = "Optimum Moisture Content = " + String(xVals[maxIx]) + " %";
-		document.getElementById('maxDensity').innerHTML = "Maximum Dry Density = " + String(yVals[maxIx]) + " g/cm<sup>3</sup>";
 		return trace(xVals, yVals, 'Graph');
 	};
 
@@ -49,22 +36,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		if(translate[0] === 0 && translate[1] === 0)
 		{
-			if(step === 2)
+			if(step === 4)
 			{
-				document.getElementById("output1").innerHTML = "Mass of ring = " + String(randomNumber(3500, 3800)) + " g";
-			}
-
-			else if(step === 4)
-			{
+				document.getElementById("output1").innerHTML = "Sample Diameter = 6.35 cm";
+				document.getElementById("output2").innerHTML = "Sample Height = 2.54 cm";
+				document.getElementById("output3").innerHTML = "Height of Solids, H<sub>s</sub> = 1.356 cm";
 				objs['soil'] = new ring(obj.height, obj.width, obj.pos[0], obj.pos[1], obj.color);
 			}
 
 			else if(step === enabled.length - 2)
 			{
-				const retTrace = logic(tableData);
+				document.getElementById("output4").innerHTML = "Pressure on Sample = 3.906 kg/cm" + "2".sup();
+				const retTrace = logic(tableData, mainTableData);
 				generateTableHead(table, Object.keys(tableData[0]));
 				generateTable(table, tableData);
-				drawGraph([retTrace], ['Water Content(%)', 'Dry Density(g/cc)'], 'plot');
+				generateTableHead(mainTable, Object.keys(mainTableData[0]));
+				generateTable(mainTable, mainTableData);
+				drawGraph([retTrace], ['Time (min)', 'Dial Reading (cm)'], 'plot');
 
 				document.getElementById("main").style.display = 'none';
 				document.getElementById("graph").style.display = 'inline-block';
@@ -97,6 +85,28 @@ document.addEventListener('DOMContentLoaded', function() {
 		ctx.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
 	};
 
+	class rect {
+		constructor(height, width, x, y, color) {
+			this.height = height;
+			this.width = width;
+			this.pos = [x, y];
+			this.color = color; 
+		};
+
+		draw(ctx) {
+			ctx.fillStyle = this.color;
+			ctx.beginPath();
+			ctx.rect(this.pos[0], this.pos[1], this.width, this.height);
+			ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+		};
+
+		shrink(change) {
+			this.height -= change;
+		};
+	};
+
 	class loader {
 		constructor(height, width, radius, x, y) {
 			this.height = height;
@@ -115,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			ctx.rect(this.pos[0] + marginVert, this.pos[1], widthVert, heightVert);
 			ctx.rect(this.pos[0] + this.width - marginVert, this.pos[1], -widthVert, heightVert);
 			ctx.rect(this.pos[0], this.pos[1] + heightVert, this.width, this.height - heightVert);
-			ctx.rect(this.pos[0], this.pos[1] + heightVert, this.width, this.height - heightVert);
 			ctx.rect(this.pos[0], this.pos[1] + this.marginHoriz, this.width, heightHoriz);
 			ctx.fill();
 			ctx.stroke();
@@ -125,8 +134,6 @@ document.addEventListener('DOMContentLoaded', function() {
 			ctx.arc(this.pos[0] + this.width / 2, this.pos[1] + this.radius, this.radius, 0, 2 * Math.PI);
 
 			canvas_arrow(ctx, this.pos[0] + this.width / 2, this.pos[1] + this.radius, this.pos[0] + this.width / 2 + this.radius * Math.sin(this.angle), this.pos[1] + this.radius * (1 - Math.cos(this.angle)));
-			//ctx.moveTo(this.pos[0] + this.width / 2, this.pos[1] + this.radius);
-			//ctx.lineTo(this.pos[0] + this.width / 2 + this.radius * Math.sin(this.angle), this.pos[1] + this.radius * (1 - Math.cos(this.angle)));
 
 			ctx.moveTo(this.pos[0] + this.width / 2, this.pos[1] + 2 * this.radius);
 			ctx.lineTo(this.pos[0] + this.width / 2, this.pos[1] + this.marginHoriz);
@@ -236,28 +243,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		};
 	};
 
-	class rect {
-		constructor(height, width, x, y, color) {
-			this.height = height;
-			this.width = width;
-			this.pos = [x, y];
-			this.color = color; 
-		};
-
-		draw(ctx) {
-			ctx.fillStyle = this.color;
-			ctx.beginPath();
-			ctx.rect(this.pos[0], this.pos[1], this.width, this.height);
-			ctx.closePath();
-			ctx.fill();
-			ctx.stroke();
-		};
-
-		shrink(change) {
-			this.height -= change;
-		};
-	};
-
 	class stones {
 		constructor(height, width, x, y, gap) {
 			this.height = height;
@@ -290,41 +275,15 @@ document.addEventListener('DOMContentLoaded', function() {
 		};
 	};
 
-	function lineFromPoints(p, q)
+	function trace(xVals, yVals, name)
 	{
-		const m = (q[1] - p[1]) / (q[0] - p[0]), c = p[1] - m * p[0];
-		const xVals = math.range(p[0], q[0], 1).toArray();
-		const yVals = xVals.map(function (x) {
-			return Number((m * x + c).toFixed(2));
-		});
-
-		return [xVals, yVals];
-	};
-
-	function trace(Xaxis, Yaxis, name)
-	{
-		let xVals = [], yVals = [];
-
-		Xaxis.forEach(function(xcoord, i) {
-			let xTemp, yTemp;
-			if(i !== Xaxis.length - 1)
-			{
-				[xTemp, yTemp] = lineFromPoints([Xaxis[i], Yaxis[i]], [Xaxis[i + 1], Yaxis[i + 1]]);
-			}
-
-			xVals = xVals.concat(xTemp);
-			yVals = yVals.concat(yTemp);
-		});
-
-		const retTrace = {
+		return {
 			x: xVals,
 			y: yVals,
 			name: name,
 			type: 'scatter',
 			mode: 'lines',
 		};
-
-		return retTrace;
 	};
 
 	function drawGraph(traces, text, id) {
@@ -341,8 +300,9 @@ document.addEventListener('DOMContentLoaded', function() {
 							color: '#000000'
 						}
 					},
-					range: [0, 20],
-					dtick: 5
+					type: 'log',
+					range: [-1, 3],
+					dtick: 1
 				},
 				yaxis: {
 					title: {
@@ -353,8 +313,8 @@ document.addEventListener('DOMContentLoaded', function() {
 							color: '#000000'
 						}
 					},
-					range: [1, 2.4],
-					dtick: 0.2
+					range: [0.16, 0.27],
+					dtick: 0.01
 				}
 			};
 
@@ -371,8 +331,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	function init()
 	{
 		fps = 150;
-		document.getElementById("output1").innerHTML = "Mass of ring = ____ g";
-		document.getElementById("output2").innerHTML = "Volume of soil = ____ cm" + "3".sup();
+		document.getElementById("output1").innerHTML = "Sample Diameter = ____ cm";
+		document.getElementById("output2").innerHTML = "Sample Height = ____ cm";
+		document.getElementById("output3").innerHTML = "Height of Solids, H<sub>s</sub> = ____ cm";
+		document.getElementById("output4").innerHTML = "Pressure on Sample = ____ kg/cm" + "2".sup();
 
 		objs = {
 			"loader": new loader(330, 270, 30, 480, 50),
@@ -385,7 +347,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		};
 		keys = [];
 
-		enabled = [["weight"], ["weight", "ring"], ["weight", "ring"], ["weight", "ring", "soil"], ["weight", "ring", "soil"], ["ring", "soil", "stones"], ["ring", "soil", "stones", "loader"], ["ring", "soil", "stones", "loader", "water"], ["ring", "soil", "stones", "loader", "water"], ["ring", "soil", "stones", "loader", "water"], ["ring", "soil", "stones", "loader", "water", "loadingCap"], ["ring", "soil", "stones", "loader", "water", "loadingCap"], [], []];
+		enabled = [["weight"], ["weight", "ring"], ["weight", "ring"], ["weight", "ring", "soil"], ["weight", "ring", "soil"], ["ring", "soil", "stones"], ["ring", "soil", "stones", "loader"], ["ring", "soil", "stones", "loader", "water"], ["ring", "soil", "stones", "loader", "water"], ["ring", "soil", "stones", "loader", "water"], ["ring", "soil", "stones", "loader", "water", "loadingCap"], ["ring", "soil", "stones", "loader", "water", "loadingCap"], []];
 		step = 0;
 		translate = [0, 0];
 		lim = [-1, -1];
@@ -401,6 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		document.getElementById("observations").style.width = '';
 
 		table.innerHTML = "";
+		mainTable.innerHTML = "";
 		init();
 
 		tmHandle = window.setTimeout(draw, 1000 / fps); 
@@ -411,8 +374,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		let row = thead.insertRow();
 		data.forEach(function(key, ind) {
 			let th = document.createElement("th");
-			let text = document.createTextNode(key);
-			th.appendChild(text);
+			th.innerHTML = key;
 			row.appendChild(th);
 		});
 	};
@@ -422,8 +384,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			let row = table.insertRow();
 			Object.keys(rowVals).forEach(function(key, i) {
 				let cell = row.insertCell();
-				let text = document.createTextNode(rowVals[key]);
-				cell.appendChild(text);
+				cell.innerHTML = rowVals[key];
 			});
 		});
 	};
@@ -536,11 +497,24 @@ document.addEventListener('DOMContentLoaded', function() {
 	init();
 
 	const tableData = [
-		{ "Soil Sample No.": "", "Water Content(%)": "", "Wet Compacted Soil Mass(g)": "", "Wet Density(g/cc)": "", "Dry Density(g/cc)": "" }, 
-		{ "Soil Sample No.": "", "Water Content(%)": "", "Wet Compacted Soil Mass(g)": "", "Wet Density(g/cc)": "", "Dry Density(g/cc)": "" }, 
-		{ "Soil Sample No.": "", "Water Content(%)": "", "Wet Compacted Soil Mass(g)": "", "Wet Density(g/cc)": "", "Dry Density(g/cc)": "" }, 
-		{ "Soil Sample No.": "", "Water Content(%)": "", "Wet Compacted Soil Mass(g)": "", "Wet Density(g/cc)": "", "Dry Density(g/cc)": "" }, 
-		{ "Soil Sample No.": "", "Water Content(%)": "", "Wet Compacted Soil Mass(g)": "", "Wet Density(g/cc)": "", "Dry Density(g/cc)": "" }, 
+		{ "Time, t (min)": "0", "Vertical Dial Reading (cm)": "0.162" }, 
+		{ "Time, t (min)": "1", "Vertical Dial Reading (cm)": "0.175" }, 
+		{ "Time, t (min)": "4", "Vertical Dial Reading (cm)": "0.202" }, 
+		{ "Time, t (min)": "9", "Vertical Dial Reading (cm)": "0.220" }, 
+		{ "Time, t (min)": "16", "Vertical Dial Reading (cm)": "0.234" }, 
+		{ "Time, t (min)": "25", "Vertical Dial Reading (cm)": "0.242" }, 
+		{ "Time, t (min)": "60", "Vertical Dial Reading (cm)": "0.255" }, 
+		{ "Time, t (min)": "240", "Vertical Dial Reading (cm)": "0.261" }, 
+		{ "Time, t (min)": "1440", "Vertical Dial Reading (cm)": "0.269" }, 
+	];
+
+	const mainTableData = [
+		{ "Pressure, p (kg/cm<sup>2</sup>)": "0", "Final Dial Reading (cm)": "0.051", "Final Sample Height, H<sub>f</sub> (cm)": "2.54", "Voids Height, H<sub>v</sub> (cm)": "1.171", "Void Ratio, e": "0.855", "Average Height, H<sub>av</sub> (cm)": "-", "Consolidation Coefficient, c<sub>v</sub> (cm<sup>2</sup>/sec)": "-" }, 
+		{ "Pressure, p (kg/cm<sup>2</sup>)": "0.488", "Final Dial Reading (cm)": "0.072", "Final Sample Height, H<sub>f</sub> (cm)": "2.519", "Voids Height, H<sub>v</sub> (cm)": "1.15", "Void Ratio, e": "0.840", "Average Height, H<sub>av</sub> (cm)": "2.529", "Consolidation Coefficient, c<sub>v</sub> (cm<sup>2</sup>/sec)": "4.587" }, 
+		{ "Pressure, p (kg/cm<sup>2</sup>)": "0.976", "Final Dial Reading (cm)": "0.09", "Final Sample Height, H<sub>f</sub> (cm)": "2.5", "Voids Height, H<sub>v</sub> (cm)": "1.131", "Void Ratio, e": "0.826", "Average Height, H<sub>av</sub> (cm)": "2.51", "Consolidation Coefficient, c<sub>v</sub> (cm<sup>2</sup>/sec)": "5.542" }, 
+		{ "Pressure, p (kg/cm<sup>2</sup>)": "1.953", "Final Dial Reading (cm)": "0.162", "Final Sample Height, H<sub>f</sub> (cm)": "2.429", "Voids Height, H<sub>v</sub> (cm)": "1.059", "Void Ratio, e": "0.774", "Average Height, H<sub>av</sub> (cm)": "2.464", "Consolidation Coefficient, c<sub>v</sub> (cm<sup>2</sup>/sec)": "2.077" }, 
+		{ "Pressure, p (kg/cm<sup>2</sup>)": "3.906", "Final Dial Reading (cm)": "0.269", "Final Sample Height, H<sub>f</sub> (cm)": "2.322", "Voids Height, H<sub>v</sub> (cm)": "0.953", "Void Ratio, e": "0.696", "Average Height, H<sub>av</sub> (cm)": "2.375", "Consolidation Coefficient, c<sub>v</sub> (cm<sup>2</sup>/sec)": "0.948" }, 
+		{ "Pressure, p (kg/cm<sup>2</sup>)": "7.812", "Final Dial Reading (cm)": "0.385", "Final Sample Height, H<sub>f</sub> (cm)": "2.206", "Voids Height, H<sub>v</sub> (cm)": "0.837", "Void Ratio, e": "0.612", "Average Height, H<sub>av</sub> (cm)": "2.264", "Consolidation Coefficient, c<sub>v</sub> (cm<sup>2</sup>/sec)": "1.052" }, 
 	];
 
 	const objNames = Object.keys(objs);
@@ -566,7 +540,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		step = check(event, translate, step);
 	});
 
-	const table = document.getElementsByClassName("table")[0];
+	const table = document.getElementsByClassName("table")[1];
+	const mainTable = document.getElementsByClassName("table")[0];
 
 	function responsiveTable(x) {
 		if(x.matches)	// If media query matches
