@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const restartButton = document.getElementById('restart');
 	const instrMsg = document.getElementById('procedure-message');
 
-	restartButton.addEventListener('click', function() {restart();});
+	restartButton.addEventListener('click', restart);
 
 	function randomNumber(min, max) {
 		return Number((Math.random() * (max - min + 1) + min).toFixed(2));
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			ctx.fill();
 			ctx.stroke();
 
-			ctx.fillStyle = "white";
+			ctx.fillStyle = data.colors.white;
 			ctx.beginPath();
 			ctx.arc(this.pos[0] + this.width / 2, this.pos[1] + this.radius, this.radius, 0, 2 * Math.PI);
 
@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			this.pos = [x, y];
 			this.gap = gap;
 			
-			this.stonesArr = [new rect(this.height, this.width, this.pos[0], this.pos[1], "black"), new rect(this.height, this.width, this.pos[0], this.pos[1] + this.gap, "black")];
+			this.stonesArr = [new rect(this.height, this.width, this.pos[0], this.pos[1], data.colors.black), new rect(this.height, this.width, this.pos[0], this.pos[1] + this.gap, data.colors.black)];
 		};
 
 		draw(ctx) {
@@ -475,7 +475,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const ctx = canvas.getContext("2d");
 	ctx.lineWidth = 3;
 
-	const border = "black", lineWidth = 3;
+	const border = data.colors.black, lineWidth = 3;
 	const msgs = [
 		"Click on 'Weighing Machine' in the apparatus menu to add a weighing machine to the workspace.", 
 		"Click on 'Consolidation Ring' in the apparatus menu to add a consolidation ring to the workspace.",
