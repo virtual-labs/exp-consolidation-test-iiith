@@ -492,7 +492,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		"Click the restart button to perform the experiment again.",
 	];
 
-	let soilVol;
 	let step, translate, lim, objs, keys, enabled, small, fps;
 	init();
 
