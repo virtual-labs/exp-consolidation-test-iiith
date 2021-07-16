@@ -1,18 +1,69 @@
-[
-{"question":"This is a Sample Question 1?",
-"answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
-          },
-"correctAnswer":"a"},
-{"question":"This is a Sample Question 2?",
-"answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
-          },
-"correctAnswer":"c"} 
-]
+{
+	"version": 2.0,
+	"questions": [
+		{
+			"question": "1. The reference of consolidation test is in ____.",
+			"answers": {
+				"a": "IS 800: 2007",
+				"b": "IS 456: 2000",
+				"c": "IS 2762",
+				"d": "IS 2720 (Part 15): 1986"
+			},
+			"explanations": {
+				"a": "IS 800: 2007 is for the design of steel structures.",
+				"b": "IS 456: 2000 is about plain and reinforced concrete.",
+				"d": "The standard reference of the consolidation test is in IS 2720 (Part 15): 1986."
+			},
+			"difficulty": "beginner",
+			"correctAnswer": "d"
+		},
+		{
+			"question": "2. During the laboratory test of consolidation, each pressure increment is maintained constant until the compression virtually ceases and it generally takes ____.",
+			"answers": {
+				"a": "2 minutes",
+				"b": "30 minutes",
+				"c": "1 hour",
+				"d": "24 hours"
+			},
+			"explanations": {
+				"a": "The consolidation of the soil takes a lot of time.",
+				"b": "The consolidation of the soil takes a lot of time.",
+				"c": "The consolidation of the soil takes a lot of time.",
+				"d": "The consolidation of the soil takes a lot of time, so in order to test it, the specimen is allowed to consolidate under a number of increments of vertical pressures of 10, 20, 50, 100, 200, 400, 800 and 1000 kPa and each pressure is maintained constant until the compression virtually ceases. This generally takes 24 hours or more to complete."
+			},
+			"difficulty": "beginner",
+			"correctAnswer": "d"
+		},
+		{
+			"question": "3. Coefficient of consolidation is used to calculate which of the following?",
+			"answers": {
+				"a": "Time rate of settlement",
+				"b": "Total settlement",
+				"c": "Pre consolidation pressure",
+				"d": "Stress in the soil"
+			},
+			"explanations": {
+				"a": "The average degree of consolidation depends upon the non-dimensional time factor T<sub>v</sub>. The time factor T<sub>v</sub> depends upon the coefficient of consolidation C<sub>v</sub>, time t and drainage path d."
+			},
+			"difficulty": "beginner",
+			"correctAnswer": "a"
+		},
+		{
+			"question": "4. The results of a consolidation test on an undisturbed soil, sampled at a depth of 10 m below the ground level are as follows: Saturated unit weight = 16 kN/m<sup>3</sup>, Pre-consolidation pressure = 90 kPa. The water table was encountered at the ground level. Assuming the unit weight of water as 10 kN/m<sup>3</sup>, the over-consolidation ratio of the soil is ____.",
+			"answers": {
+				"a": "0.67",
+				"b": "1.50",
+				"c": "1.77",
+				"d": "2.00"
+			},
+			"explanations": {
+				"a": "Over consolidation ratio = Maximum effective stress pre-consolidation / Effective stress of soil.",
+				"b": "Over consolidation ratio = Maximum effective stress pre-consolidation / Effective stress of soil = 90 kPa / ((γ - γ<sub>w</sub>) * z) = 90 / ((16 - 10) * 10) = 90 / 60 = 1.5",
+				"c": "Over consolidation ratio = Maximum effective stress pre-consolidation / Effective stress of soil.",
+				"d": "Over consolidation ratio = Maximum effective stress pre-consolidation / Effective stress of soil."
+			},
+			"difficulty": "advanced",
+			"correctAnswer": "b"
+		}
+	]
+}
