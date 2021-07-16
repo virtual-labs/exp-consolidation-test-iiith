@@ -297,7 +297,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						font: {
 							family: 'Courier New, monospace',
 							size: 18,
-							color: '#000000'
+							color: data.colors.black
 						}
 					},
 					type: 'log',
@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						font: {
 							family: 'Courier New, monospace',
 							size: 18,
-							color: '#000000'
+							color: data.colors.black
 						}
 					},
 					range: [0.16, 0.27],

@@ -12,7 +12,6 @@
 			"explanations": {
 				"a": "IS 800: 2007 is for the design of steel structures.",
 				"b": "IS 456: 2000 is about plain and reinforced concrete.",
-				"c": "",
 				"d": "The standard reference of the consolidation test is in IS 2720 (Part 15): 1986."
 			},
 			"difficulty": "beginner",
@@ -44,10 +43,7 @@
 				"d": "Stress in the soil"
 			},
 			"explanations": {
-				"a": "The average degree of consolidation depends upon the non-dimensional time factor T<sub>v</sub>. The time factor T<sub>v</sub> depends upon the coefficient of consolidation C<sub>v</sub>, time t and drainage path d.",
-				"b": "",
-				"c": "",
-				"d": ""
+				"a": "The average degree of consolidation depends upon the non-dimensional time factor T<sub>v</sub>. The time factor T<sub>v</sub> depends upon the coefficient of consolidation C<sub>v</sub>, time t and drainage path d."
 			},
 			"difficulty": "beginner",
 			"correctAnswer": "a"
