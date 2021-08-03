@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+    <!-- For iPhone -->
+    <meta name="msapplication-TileColor" content="#4076e0">
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#4076e0">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#4076e0">
+    <title>Virtual Labs</title>
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" />
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css" integrity="sha512-Oy18vBnbSJkXTndr2n6lDMO5NN31UljR8e/ICzVPrGpSud4Gkckb8yUpqhKuUNoE+o9gAb4O/rAxxw1ojyUVzg==" crossorigin="anonymous" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Raleway&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="./assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/github-markdown.min.css" />
+    <link rel="stylesheet" href="./assets/css/vlabs-style.css" />
+    
+    <script src="./assets/js/jquery-3.4.1.slim.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+      integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+      integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      h1 {
+      font-size: 1.8rem;
+      }
+      h2 {
+      font-size: 1.4rem;
+      }
+      h3 {
+      font-size: 1.2rem;
+      }
+
+      h2, h3 {
+      font-weight: 800;
+      }
+    </style>
+  </head>
+  <body class="p-0 container-fluid vlabs-page d-flex flex-column justify-content-between">
+    <header class="vlabs-header sticky-top bg-white">
+      <nav class="p-0 navbar navbar-light d-flex align-items-stretch">
+        
+        <button class="navbar-toggler px-4"
+        	    type="button" onclick="toggle()">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="d-flex justify-content-center">        
+          <a href="http://vlab.co.in" class="navbar-brand">
+            <img src="./assets/images/vlabs-color-small-moe.jpg" alt="vlabs logo">
+          </a>
+        </div>
+        
+        <div id="headerNavbar" class="border-top flex-grow-1 d-flex align-items-center">
+          <ul class="navbar-nav ml-auto text-center d-flex flex-md-row">
+            <li class="nav-item px-2 m-1">
+              <a href="http://vlab.co.in">HOME</a>
+            </li>
+            <li class="nav-item px-2 m-1">
+              <a href="http://vlab.co.in/participating-institutes">PARTNERS</a>
+            </li>
+            <li class="nav-item px-2 m-1">
+              <a href="http://vlab.co.in/contact-us">CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div class="container-fluid flex-fill d-flex flex-column vlabs-page-main">
+      <div class="row flex-grow-1 px-4 d-flex flex-nowrap">
+        <div class="nav flex-column sidebar flex-shrink-0" id="menu">
+            <div>
+              <div class="d-flex">
+                <a href="index.html" class="p-2 ">
+                  Aim
+                </a>
+                
+              </div>
+              <div id="t-"
+                
+                   class="collapse" 
+                >
+                <div class="px-1 d-flex flex-column tasks">
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="d-flex">
+                <a href="theory.html" class="p-2 ">
+                  Theory
+                </a>
+                
+              </div>
+              <div id="t-"
+                
+                   class="collapse" 
+                >
+                <div class="px-1 d-flex flex-column tasks">
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="d-flex">
+                <a href="pretest.html" class="p-2 ">
+                  Pretest
+                </a>
+                
+              </div>
+              <div id="t-"
+                
+                   class="collapse" 
+                >
+                <div class="px-1 d-flex flex-column tasks">
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="d-flex">
+                <a href="procedure.html" class="p-2 ">
+                  Procedure
+                </a>
+                
+              </div>
+              <div id="t-"
+                
+                   class="collapse" 
+                >
+                <div class="px-1 d-flex flex-column tasks">
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="d-flex">
+                <a href="simulation.html" class="p-2 ">
+                  Simulation
+                </a>
+                
+              </div>
+              <div id="t-"
+                
+                   class="collapse" 
+                >
+                <div class="px-1 d-flex flex-column tasks">
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="d-flex">
+                <a href="posttest.html" class="p-2  current-item ">
+                  Posttest
+                </a>
+                
+              </div>
+              <div id="t-"
+                
+                   class="collapse" 
+                >
+                <div class="px-1 d-flex flex-column tasks">
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="d-flex">
+                <a href="references.html" class="p-2 ">
+                  References
+                </a>
+                
+              </div>
+              <div id="t-"
+                
+                   class="collapse" 
+                >
+                <div class="px-1 d-flex flex-column tasks">
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="d-flex">
+                <a href="feedback.html" class="p-2 ">
+                  Feedback
+                </a>
+                
+              </div>
+              <div id="t-"
+                
+                   class="collapse" 
+                >
+                <div class="px-1 d-flex flex-column tasks">
+                </div>
+              </div>
+            </div>
+        </div>        <div class="vlabs-page-content px-4 pb-4 flex-grow-1 markdown-body">
+          <div class="text-center">
+            <h2 id="consolidation-test">Consolidation Test</h2>
+        
+          </div>
+                <div id="difficulty-container" class="row">
+                  <div id="difficulty-label" class="col-6 col-md-2" style="display:none">Choose difficulty: </div>
+                  <div class="form-check col-6 col-md-2" style="display:none">
+                    <input id="beginner"  type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      <strong>Beginner</strong>
+                    </label>
+                  </div>
+                  <div class="form-check col-6 col-md-2"  style="display:none">
+                    <input id="intermediate" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      <strong>Intermediate</strong>
+                    </label>
+                  </div>
+                  <div class="form-check col-6 col-md-2" style="display:none">
+                    <input id="advanced" type="checkbox" value=""  id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      <strong>Advanced</strong>
+                    </label>
+                  </div>
+                </div>
+                
+                <div id="quiz" class="version2">
+              
+              
+                <div class="question beginner">
+                  1. The reference of consolidation test is in ____.
+                </div>
+                
+                <div class="answers">
+                  <div id="answer0a">
+                    <label>
+                      <input type="radio" name="question0" value="a">
+                      a: IS 800: 2007
+                    </label>
+                    <a href="#" id="explanation0a" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+                  <div id="answer0b">
+                    <label>
+                      <input type="radio" name="question0" value="b">
+                      b: IS 456: 2000
+                    </label>
+                    <a href="#" id="explanation0b" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+                  <div id="answer0c">
+                    <label>
+                      <input type="radio" name="question0" value="c">
+                      c: IS 2762
+                    </label>
+                    <a href="#" id="explanation0c" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+                  <div id="answer0d">
+                    <label>
+                      <input type="radio" name="question0" value="d">
+                      d: IS 2720 (Part 15): 1986
+                    </label>
+                    <a href="#" id="explanation0d" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+              </div>
+              
+                <div class="question beginner">
+                  2. During the laboratory test of consolidation, each pressure increment is maintained constant until the compression virtually ceases and it generally takes ____.
+                </div>
+                
+                <div class="answers">
+                  <div id="answer1a">
+                    <label>
+                      <input type="radio" name="question1" value="a">
+                      a: 2 minutes
+                    </label>
+                    <a href="#" id="explanation1a" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+                  <div id="answer1b">
+                    <label>
+                      <input type="radio" name="question1" value="b">
+                      b: 30 minutes
+                    </label>
+                    <a href="#" id="explanation1b" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+                  <div id="answer1c">
+                    <label>
+                      <input type="radio" name="question1" value="c">
+                      c: 1 hour
+                    </label>
+                    <a href="#" id="explanation1c" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+                  <div id="answer1d">
+                    <label>
+                      <input type="radio" name="question1" value="d">
+                      d: 24 hours
+                    </label>
+                    <a href="#" id="explanation1d" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+              </div>
+              
+                <div class="question beginner">
+                  3. Coefficient of consolidation is used to calculate which of the following?
+                </div>
+                
+                <div class="answers">
+                  <div id="answer2a">
+                    <label>
+                      <input type="radio" name="question2" value="a">
+                      a: Time rate of settlement
+                    </label>
+                    <a href="#" id="explanation2a" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+                  <div id="answer2b">
+                    <label>
+                      <input type="radio" name="question2" value="b">
+                      b: Total settlement
+                    </label>
+                    <a href="#" id="explanation2b" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+                  <div id="answer2c">
+                    <label>
+                      <input type="radio" name="question2" value="c">
+                      c: Pre consolidation pressure
+                    </label>
+                    <a href="#" id="explanation2c" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+                  <div id="answer2d">
+                    <label>
+                      <input type="radio" name="question2" value="d">
+                      d: Stress in the soil
+                    </label>
+                    <a href="#" id="explanation2d" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+              </div>
+              
+                <div class="question advanced">
+                  4. The results of a consolidation test on an undisturbed soil, sampled at a depth of 10 m below the ground level are as follows: Saturated unit weight = 16 kN/m<sup>3</sup>, Pre-consolidation pressure = 90 kPa. The water table was encountered at the ground level. Assuming the unit weight of water as 10 kN/m<sup>3</sup>, the over-consolidation ratio of the soil is ____.
+                </div>
+                
+                <div class="answers">
+                  <div id="answer3a">
+                    <label>
+                      <input type="radio" name="question3" value="a">
+                      a: 0.67
+                    </label>
+                    <a href="#" id="explanation3a" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+                  <div id="answer3b">
+                    <label>
+                      <input type="radio" name="question3" value="b">
+                      b: 1.50
+                    </label>
+                    <a href="#" id="explanation3b" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+                  <div id="answer3c">
+                    <label>
+                      <input type="radio" name="question3" value="c">
+                      c: 1.77
+                    </label>
+                    <a href="#" id="explanation3c" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+                  <div id="answer3d">
+                    <label>
+                      <input type="radio" name="question3" value="d">
+                      d: 2.00
+                    </label>
+                    <a href="#" id="explanation3d" class="accordion" onclick="return false;">Explanation</a>
+                  </div>
+                  <p class="panel">Explanation</p>
+              </div>
+             </div>
+              <button id="submit" class="btn btn-primary">Submit Quiz</button>
+              <div id="results"></div>
+        </div>
+          
+          <script>
+            const myQuestions = [{"question":"1. The reference of consolidation test is in ____.","answers":{"a":"IS 800: 2007","b":"IS 456: 2000","c":"IS 2762","d":"IS 2720 (Part 15): 1986"},"explanations":{"a":"IS 800: 2007 is for the design of steel structures.","b":"IS 456: 2000 is about plain and reinforced concrete.","d":"The standard reference of the consolidation test is in IS 2720 (Part 15): 1986."},"difficulty":"beginner","correctAnswer":"d"},{"question":"2. During the laboratory test of consolidation, each pressure increment is maintained constant until the compression virtually ceases and it generally takes ____.","answers":{"a":"2 minutes","b":"30 minutes","c":"1 hour","d":"24 hours"},"explanations":{"a":"The consolidation of the soil takes a lot of time.","b":"The consolidation of the soil takes a lot of time.","c":"The consolidation of the soil takes a lot of time.","d":"The consolidation of the soil takes a lot of time, so in order to test it, the specimen is allowed to consolidate under a number of increments of vertical pressures of 10, 20, 50, 100, 200, 400, 800 and 1000 kPa and each pressure is maintained constant until the compression virtually ceases. This generally takes 24 hours or more to complete."},"difficulty":"beginner","correctAnswer":"d"},{"question":"3. Coefficient of consolidation is used to calculate which of the following?","answers":{"a":"Time rate of settlement","b":"Total settlement","c":"Pre consolidation pressure","d":"Stress in the soil"},"explanations":{"a":"The average degree of consolidation depends upon the non-dimensional time factor T<sub>v</sub>. The time factor T<sub>v</sub> depends upon the coefficient of consolidation C<sub>v</sub>, time t and drainage path d."},"difficulty":"beginner","correctAnswer":"a"},{"question":"4. The results of a consolidation test on an undisturbed soil, sampled at a depth of 10 m below the ground level are as follows: Saturated unit weight = 16 kN/m<sup>3</sup>, Pre-consolidation pressure = 90 kPa. The water table was encountered at the ground level. Assuming the unit weight of water as 10 kN/m<sup>3</sup>, the over-consolidation ratio of the soil is ____.","answers":{"a":"0.67","b":"1.50","c":"1.77","d":"2.00"},"explanations":{"a":"Over consolidation ratio = Maximum effective stress pre-consolidation / Effective stress of soil.","b":"Over consolidation ratio = Maximum effective stress pre-consolidation / Effective stress of soil = 90 kPa / ((γ - γ<sub>w</sub>) * z) = 90 / ((16 - 10) * 10) = 90 / 60 = 1.5","c":"Over consolidation ratio = Maximum effective stress pre-consolidation / Effective stress of soil.","d":"Over consolidation ratio = Maximum effective stress pre-consolidation / Effective stress of soil."},"difficulty":"advanced","correctAnswer":"b"}];
+          </script>
+            <script src="./assets/js/assesment_v2.js"></script>  
+      </div>
+    </div>
+    <footer class="text-light pt-2 vlabs-footer d-flex flex-column">
+      <div class="row px-5">
+        <div class="col d-flex flex-column">
+          <span class="font-weight-bold vlabs-footer-sect-name pb-2 mb-3">Community Links</span>
+          <a href="http://www.sakshat.ac.in/" class="text-light">Sakshat Portal</a>
+          <a href="http://outreach.vlabs.ac.in/" class="text-light">Outreach Portal</a>
+          <a href="http://vlab.co.in/faq" class="text-light">FAQ: Virtual Labs</a>
+        </div>
+        <div class="col d-flex flex-column">
+          <span class="font-weight-bold vlabs-footer-sect-name pb-2 mb-3">Contact Us</span>
+          <span> Phone: General Information: 011-26582050 </span>
+          <span> Email: support@vlabs.ac.in </span>
+        </div>
+        <div class="col d-flex flex-column">
+          <span class="font-weight-bold vlabs-footer-sect-name pb-2 mb-3">Follow Us</span>
+          <div class="social-links">
+    	<a class="p-2 mt-1 mr-2 d-inline-flex justify-content-center align-items-center" style="background: #55acee;" href="https://twitter.com/TheVirtualLabs">
+    	  <i class="fa fa-twitter"></i>
+    	</a>
+    	<a class="p-2 mt-1 mr-2 d-inline-flex justify-content-center align-items-center" style="background: #3b5998;" href="https://www.facebook.com/Virtual-Labs-IIT-Delhi-301510159983871/">
+    	  <i class="fa fa-facebook"></i>
+    	</a>
+    	<a class="p-2 mt-1 mr-2 d-inline-flex justify-content-center align-items-center" style="background: #e52d27;" href="https://www.youtube.com/watch?v=asxRaOgk6a0">
+    	  <i class="fa fa-youtube"></i>
+    	</a>
+    	<a class="p-2 mt-1 mr-2 d-inline-flex justify-content-center align-items-center" style="background: #2867B2;" href="https://in.linkedin.com/in/virtual-labs-008ba9136">
+    	  <i class="fa fa-linkedin"></i>
+    	</a>
+          </div>
+        </div>
+      </div>
+      <div class="m-0 py-2 text-center" style='font-family: "Open Sans", sans-serif; background: #212121;'>
+        <a class="text-primary font-weight-bold" href="https://www.gnu.org/licenses/agpl-3.0.en.html"> AGPL 3.0 </a>
+        &nbsp;&amp;&nbsp;
+        <a class="text-primary font-weight-bold" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"> Creative Commons (CC BY-NC-SA 4.0) </a>
+      </div>
+    </footer>
+
+      <script src="./assets/js/toggleSidebar.js"></script>
+      
+  </body>
+</html>
