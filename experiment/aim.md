@@ -4,3 +4,4 @@ To determine the settlements due to primary consolidation of soil by conducting 
 3. Pressure-void ratio relationship
 4. Coefficient of consolidation at various pressures
 5. Compression index
+
