@@ -1,0 +1,154 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. Porous stones are kept at the top and bottom of the specimen in consolidation test.",
+      "answers": {
+        "a": "True",
+        "b": "False"
+      },
+      "explanations": {
+        "a": "Correct. In order to facilitate the drainage of pore water present between the soil particles, porous stones are kept at the top and the bottom of the soil specimen in a consolidation test.",
+        "b": "Incorrect. Without porous stones, the water would be trapped, preventing the consolidation process from occurring as intended."
+      },
+      "difficulty": "beginner",
+      "correctAnswer": "a"
+    },
+    {
+      "question": "2. The vertical compression of the specimen is measured by means of ____.",
+      "answers": {
+        "a": "Base plate",
+        "b": "Load frame",
+        "c": "Dial gauge",
+        "d": "Pressure ball"
+      },
+      "explanations": {
+        "a": "Incorrect. A base plate provides support but does not have the mechanism to measure displacement.",
+        "b": "Incorrect. The load frame is used to apply the force, not to measure the resulting compression.",
+        "c": "Correct. The vertical compression of the specimen is measured by means of a dial gauge, which records the change in height of the soil specimen as loads are applied.",
+        "d": "Incorrect. A pressure ball is used to distribute the load evenly and is not a measuring instrument."
+      },
+      "difficulty": "beginner",
+      "correctAnswer": "c"
+    },
+    {
+      "question": "3. In a consolidation test, the soil is ____.",
+      "answers": {
+        "a": "Restrained laterally",
+        "b": "Restrained vertically",
+        "c": "Not restrained laterally",
+        "d": "Not restrained laterally as well as vertically"
+      },
+      "explanations": {
+        "a": "Correct. In a standard oedometer (consolidation) test, the soil is contained within a rigid metal ring that prevents any lateral expansion, forcing all deformation to occur in the vertical direction.",
+        "b": "Incorrect. The soil is not restrained vertically; in fact, vertical deformation is what the test measures.",
+        "c": "Incorrect. The metal ring specifically provides lateral restraint to simulate one-dimensional consolidation.",
+        "d": "Incorrect. The test is specifically designed to be one-dimensional, requiring lateral restraint."
+      },
+      "difficulty": "beginner",
+      "correctAnswer": "a"
+    },
+    {
+      "question": "4. Terzaghi's theory of one-dimensional consolidation assumes that the soil is:",
+      "answers": {
+        "a": "Partially saturated",
+        "b": "Fully saturated",
+        "c": "Heterogeneous",
+        "d": "Non-isotropic"
+      },
+      "explanations": {
+        "a": "Incorrect. The theory assumes all voids are filled with water to simplify the relationship between stress and pore pressure.",
+        "b": "Correct. One of the fundamental assumptions of Terzaghi's consolidation theory is that the soil is completely saturated.",
+        "c": "Incorrect. The theory assumes the soil is homogeneous to maintain consistent properties throughout the mass.",
+        "d": "Incorrect. The theory assumes the soil is isotropic, meaning properties are the same in all directions."
+      },
+      "difficulty": "intermediate",
+      "correctAnswer": "b"
+    },
+    {
+      "question": "5. The slope of the e-log σ' curve is known as the:",
+      "answers": {
+        "a": "Coefficient of consolidation",
+        "b": "Compression index",
+        "c": "Coefficient of compressibility",
+        "d": "Expansion index"
+      },
+      "explanations": {
+        "a": "Incorrect. The coefficient of consolidation (Cv) relates to the rate of consolidation, not the slope of the e-log σ' curve.",
+        "b": "Correct. The compression index (Cc) is the slope of the linear portion of the void ratio (e) versus the logarithm of effective stress (log σ') plot.",
+        "c": "Incorrect. The coefficient of compressibility (av) is the slope of the e versus σ' plot (linear scale).",
+        "d": "Incorrect. The expansion index relates to the unloading portion of the curve."
+      },
+      "difficulty": "intermediate",
+      "correctAnswer": "b"
+    },
+    {
+      "question": "6. In the square root of time fitting method, the theoretical relationship is linear up to what degree of consolidation?",
+      "answers": {
+        "a": "50%",
+        "b": "60%",
+        "c": "90%",
+        "d": "100%"
+      },
+      "explanations": {
+        "a": "Incorrect. The linear portion extends significantly further than 50%.",
+        "b": "Correct. In Taylor's square root of time method, the plot of compression versus √t is theoretical linear up to approximately 60% consolidation.",
+        "c": "Incorrect. 90% is the point used for the fitting construction, but the theoretical linearity ends earlier.",
+        "d": "Incorrect. The curve becomes non-linear long before reaching 100% consolidation."
+      },
+      "difficulty": "intermediate",
+      "correctAnswer": "b"
+    },
+    {
+      "question": "7. A clay layer 4m thick is sandwiched between two layers of sand. What is the drainage path length (d) for this clay layer?",
+      "answers": {
+        "a": "4 m",
+        "b": "2 m",
+        "c": "8 m",
+        "d": "1 m"
+      },
+      "explanations": {
+        "a": "Incorrect. This would be the drainage path for a single-drainage condition (e.g., clay over rock).",
+        "b": "Correct. Since there is sand on both sides, it is a double-drainage condition. The drainage path (d) is half the thickness: 4m / 2 = 2m.",
+        "c": "Incorrect. The drainage path cannot be longer than the layer thickness.",
+        "d": "Incorrect. The drainage path is related to the layer thickness, not a fixed value of 1m."
+      },
+      "difficulty": "advanced",
+      "correctAnswer": "b"
+    },
+    {
+      "question": "8. The time factor (Tv) for 50% consolidation is approximately:",
+      "answers": {
+        "a": "0.197",
+        "b": "0.848",
+        "c": "1.000",
+        "d": "0.050"
+      },
+      "explanations": {
+        "a": "Correct. For U = 50%, the time factor Tv is calculated as (π/4) * U² = (π/4) * (0.5)² ≈ 0.197.",
+        "b": "Incorrect. This value (0.848) corresponds to approximately 90% consolidation.",
+        "c": "Incorrect. Tv = 1.0 does not correspond to 50% consolidation.",
+        "d": "Incorrect. This value is too low for 50% consolidation."
+      },
+      "difficulty": "advanced",
+      "correctAnswer": "a"
+    },
+    {
+      "question": "9. If the coefficient of consolidation (Cv) is 2 x 10⁻⁴ cm²/s, how long will it take for a 2cm thick laboratory sample (double drainage) to reach 50% consolidation?",
+      "answers": {
+        "a": "492 s",
+        "b": "985 s",
+        "c": "1970 s",
+        "d": "3940 s"
+      },
+      "explanations": {
+        "a": "Incorrect. Re-calculate using the correct drainage path d = 1cm.",
+        "b": "Correct. d = 2cm / 2 = 1cm. Tv = (Cv * t) / d². For U=50%, Tv=0.197. t = (Tv * d²) / Cv = (0.197 * 1²) / (2 x 10⁻⁴) = 0.197 / 0.0002 = 985 s.",
+        "c": "Incorrect. This might be the result of using d = 2cm (single drainage).",
+        "d": "Incorrect. Ensure you are using the correct Cv and Tv values in the formula."
+      },
+      "difficulty": "advanced",
+      "correctAnswer": "b"
+    }
+  ]
+}
