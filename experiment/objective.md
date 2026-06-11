@@ -1,9 +1,5 @@
-To determine the settlements due to primary consolidation of soil by conducting one dimensional test to determine:
-i. Rate of consolidation under normal load.
-ii. Degree of consolidation at any time.
-iii. Pressure-void ratio relationship.
-iv. Coefficient of consolidation at various pressures.
-v. Compression index.
+The objectives of this experiment are to:
 
-
-[Read More](docs/Exp-8 ConsolidationTest.pdf)
+- Determine the consolidation characteristics of a soil sample using the one-dimensional consolidation test.
+- Study the pressure-void ratio relationship and the rate and degree of consolidation.
+- Determine consolidation parameters such as the coefficient of consolidation and compression index for geotechnical engineering applications.

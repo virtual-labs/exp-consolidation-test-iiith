@@ -1,69 +1,158 @@
 {
-	"version": 2.0,
-	"questions": [
-		{
-			"question": "1. The reference of consolidation test is in ____.",
-			"answers": {
-				"a": "IS 800: 2007",
-				"b": "IS 456: 2000",
-				"c": "IS 2762",
-				"d": "IS 2720 (Part 15): 1986"
-			},
-			"explanations": {
-				"a": "IS 800: 2007 is for the design of steel structures.",
-				"b": "IS 456: 2000 is about plain and reinforced concrete.",
-				"d": "The standard reference of the consolidation test is in IS 2720 (Part 15): 1986."
-			},
-			"difficulty": "beginner",
-			"correctAnswer": "d"
-		},
-		{
-			"question": "2. During the laboratory test of consolidation, each pressure increment is maintained constant until the compression virtually ceases and it generally takes ____.",
-			"answers": {
-				"a": "2 minutes",
-				"b": "30 minutes",
-				"c": "1 hour",
-				"d": "24 hours"
-			},
-			"explanations": {
-				"a": "The consolidation of the soil takes a lot of time.",
-				"b": "The consolidation of the soil takes a lot of time.",
-				"c": "The consolidation of the soil takes a lot of time.",
-				"d": "The consolidation of the soil takes a lot of time, so in order to test it, the specimen is allowed to consolidate under a number of increments of vertical pressures of 10, 20, 50, 100, 200, 400, 800 and 1000 kPa and each pressure is maintained constant until the compression virtually ceases. This generally takes 24 hours or more to complete."
-			},
-			"difficulty": "beginner",
-			"correctAnswer": "d"
-		},
-		{
-			"question": "3. Coefficient of consolidation is used to calculate which of the following?",
-			"answers": {
-				"a": "Time rate of settlement",
-				"b": "Total settlement",
-				"c": "Pre consolidation pressure",
-				"d": "Stress in the soil"
-			},
-			"explanations": {
-				"a": "The average degree of consolidation depends upon the non-dimensional time factor T<sub>v</sub>. The time factor T<sub>v</sub> depends upon the coefficient of consolidation C<sub>v</sub>, time t and drainage path d."
-			},
-			"difficulty": "beginner",
-			"correctAnswer": "a"
-		},
-		{
-			"question": "4. The results of a consolidation test on an undisturbed soil, sampled at a depth of 10 m below the ground level are as follows: Saturated unit weight = 16 kN/m<sup>3</sup>, Pre-consolidation pressure = 90 kPa. The water table was encountered at the ground level. Assuming the unit weight of water as 10 kN/m<sup>3</sup>, the over-consolidation ratio of the soil is ____.",
-			"answers": {
-				"a": "0.67",
-				"b": "1.50",
-				"c": "1.77",
-				"d": "2.00"
-			},
-			"explanations": {
-				"a": "Over consolidation ratio = Maximum effective stress pre-consolidation / Effective stress of soil.",
-				"b": "Over consolidation ratio = Maximum effective stress pre-consolidation / Effective stress of soil = 90 kPa / ((γ - γ<sub>w</sub>) * z) = 90 / ((16 - 10) * 10) = 90 / 60 = 1.5",
-				"c": "Over consolidation ratio = Maximum effective stress pre-consolidation / Effective stress of soil.",
-				"d": "Over consolidation ratio = Maximum effective stress pre-consolidation / Effective stress of soil."
-			},
-			"difficulty": "advanced",
-			"correctAnswer": "b"
-		}
-	]
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. The reference of consolidation test is in ____.",
+      "answers": {
+        "a": "IS 800: 2007",
+        "b": "IS 456: 2000",
+        "c": "IS 2720 (Part 5)",
+        "d": "IS 2720 (Part 15): 1986"
+      },
+      "explanations": {
+        "a": "Incorrect. IS 800: 2007 is the code of practice for general construction in steel.",
+        "b": "Incorrect. IS 456: 2000 is the code of practice for plain and reinforced concrete.",
+        "c": "Incorrect. IS 2720 (Part 5) deals with the determination of liquid and plastic limits.",
+        "d": "Correct. The standard laboratory procedure for the determination of consolidation properties of soils is specified in IS 2720 (Part 15): 1986."
+      },
+      "difficulty": "beginner",
+      "correctAnswer": "d"
+    },
+    {
+      "question": "2. During the laboratory test of consolidation, each pressure increment is typically maintained for ____.",
+      "answers": {
+        "a": "2 minutes",
+        "b": "30 minutes",
+        "c": "1 hour",
+        "d": "24 hours"
+      },
+      "explanations": {
+        "a": "Incorrect. Consolidation is a time-dependent process that requires much longer than a few minutes to complete.",
+        "b": "Incorrect. While some initial settlement occurs, 30 minutes is insufficient for primary consolidation in most clays.",
+        "c": "Incorrect. One hour is still not enough time for the excess pore pressure to dissipate fully in a standard test specimen.",
+        "d": "Correct. In a standard consolidation test, each load increment is usually maintained for 24 hours to ensure that primary consolidation is virtually complete before the next load is applied."
+      },
+      "difficulty": "beginner",
+      "correctAnswer": "d"
+    },
+    {
+      "question": "3. Coefficient of consolidation (Cv) is primarily used to calculate which of the following?",
+      "answers": {
+        "a": "Time rate of settlement",
+        "b": "Total magnitude of settlement",
+        "c": "Pre-consolidation pressure",
+        "d": "Effective stress in the soil"
+      },
+      "explanations": {
+        "a": "Correct. The coefficient of consolidation (Cv) is a key parameter in Terzaghi's theory that determines how quickly the consolidation process occurs over time.",
+        "b": "Incorrect. The total magnitude of settlement is determined using the compression index (Cc) or the coefficient of volume change (mv).",
+        "c": "Incorrect. Pre-consolidation pressure is determined from the e-log σ' curve using Casagrande's graphical method.",
+        "d": "Incorrect. Effective stress is a state of stress, not a property calculated from Cv."
+      },
+      "difficulty": "beginner",
+      "correctAnswer": "a"
+    },
+    {
+      "question": "4. The process of consolidation in soil is due to the expulsion of:",
+      "answers": {
+        "a": "Air from the voids",
+        "b": "Water from the voids",
+        "c": "Solid particles from the mass",
+        "d": "Both air and water"
+      },
+      "explanations": {
+        "a": "Incorrect. The expulsion of air is referred to as compaction.",
+        "b": "Correct. Consolidation is specifically the process of volume reduction in saturated soils due to the expulsion of water from the voids under a sustained static load.",
+        "c": "Incorrect. Solid particles do not leave the soil mass during consolidation.",
+        "d": "Incorrect. Since consolidation assumes saturation, only water is expelled."
+      },
+      "difficulty": "intermediate",
+      "correctAnswer": "b"
+    },
+    {
+      "question": "5. Which graphical method is used to determine the coefficient of consolidation (Cv) using the 90% consolidation point?",
+      "answers": {
+        "a": "Logarithm of time method",
+        "b": "Square root of time method",
+        "c": "Hyperbolic method",
+        "d": "Slope-intercept method"
+      },
+      "explanations": {
+        "a": "Incorrect. The log-time method (Casagrande's) uses the 50% consolidation point (t50).",
+        "b": "Correct. Taylor's square root of time method uses a construction that identifies the time for 90% consolidation (t90).",
+        "c": "Incorrect. The hyperbolic method is an alternative but not the standard one using the 90% point.",
+        "d": "Incorrect. This is a general mathematical term and not a specific consolidation fitting method."
+      },
+      "difficulty": "intermediate",
+      "correctAnswer": "b"
+    },
+    {
+      "question": "6. A soil that has never been subjected to an effective stress greater than its current effective stress is called:",
+      "answers": {
+        "a": "Over-consolidated soil",
+        "b": "Normally consolidated soil",
+        "c": "Under-consolidated soil",
+        "d": "Pre-consolidated soil"
+      },
+      "explanations": {
+        "a": "Incorrect. Over-consolidated soil has experienced higher stresses in the past.",
+        "b": "Correct. A normally consolidated soil is one where the current effective overburden pressure is the maximum stress the soil has ever experienced.",
+        "c": "Incorrect. Under-consolidated soil is still in the process of consolidating under its current load.",
+        "d": "Incorrect. Pre-consolidated is another term related to over-consolidation."
+      },
+      "difficulty": "intermediate",
+      "correctAnswer": "b"
+    },
+    {
+      "question": "7. The results of a consolidation test on an undisturbed soil, sampled at a depth of 10 m below the ground level are as follows: Saturated unit weight = 16 kN/m³, Pre-consolidation pressure = 90 kPa. The water table is at the ground level. (γw = 10 kN/m³). The over-consolidation ratio (OCR) is:",
+      "answers": {
+        "a": "0.67",
+        "b": "1.50",
+        "c": "1.77",
+        "d": "2.00"
+      },
+      "explanations": {
+        "a": "Incorrect. OCR must be greater than or equal to 1 for stable natural deposits.",
+        "b": "Correct. Effective overburden stress σ' = (γsat - γw) * z = (16 - 10) * 10 = 60 kPa. OCR = Pre-consolidation pressure / Current effective stress = 90 / 60 = 1.5.",
+        "c": "Incorrect. Re-calculate the effective stress by subtracting the pore water pressure.",
+        "d": "Incorrect. Ensure you are using the correct unit weights and depth in the calculation."
+      },
+      "difficulty": "advanced",
+      "correctAnswer": "b"
+    },
+    {
+      "question": "8. If a 10m thick clay layer with double drainage takes 4 years to reach 50% consolidation, how long would it take to reach the same degree of consolidation if it had only single drainage?",
+      "answers": {
+        "a": "2 years",
+        "b": "4 years",
+        "c": "8 years",
+        "d": "16 years"
+      },
+      "explanations": {
+        "a": "Incorrect. Single drainage increases the drainage path, which increases the time required.",
+        "b": "Incorrect. The drainage condition significantly changes the consolidation time.",
+        "c": "Incorrect. The relationship between time and drainage path length is squared, not linear.",
+        "d": "Correct. Time t is proportional to d². For double drainage, d = H/2. For single drainage, d = H. The drainage path doubles, so the time increases by a factor of 2² = 4. Total time = 4 years * 4 = 16 years."
+      },
+      "difficulty": "advanced",
+      "correctAnswer": "d"
+    },
+    {
+      "question": "9. In the Casagrande method for determining pre-consolidation pressure, the first step is to locate the point of:",
+      "answers": {
+        "a": "Maximum curvature on the e-log σ' curve",
+        "b": "Minimum void ratio",
+        "c": "Initial effective stress",
+        "d": "Maximum slope on the compression curve"
+      },
+      "explanations": {
+        "a": "Correct. The Casagrande graphical procedure begins by identifying the point on the e-log σ' plot that has the smallest radius of curvature (maximum curvature).",
+        "b": "Incorrect. The minimum void ratio occurs at the end of the test, which is not the starting point for this method.",
+        "c": "Incorrect. The method is used to find the past maximum stress, not the current one.",
+        "d": "Incorrect. The maximum slope occurs in the virgin compression range, which is after the pre-consolidation point."
+      },
+      "difficulty": "advanced",
+      "correctAnswer": "a"
+    }
+  ]
 }
